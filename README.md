@@ -6,6 +6,13 @@
 	- [ ] password changing
 	- [x] unifying all passwords under one private key (involves changing all the passwords);
 - [ ] Implement the CLI
+- [ ] Solve repeating uppercase letters
+another postfix can be added to the privatekey that suggests how many characters will be taken from the password hash and how many from the base64 encoding.
+
+
+- [ ] Solve repeating lowercase letters
+- [ ] Solve repeating letters
+
 
 * If private-key.json exist
 	$ passoff twitch
@@ -25,16 +32,10 @@
 	$ heres your private key : 123qadsfjp02934u03
 	$ do you want to create a private-key.json (y/n)?:
 	$ enter master pass (make sure its the same one for all the sites): 
+  
 
-changing password is a pain in the ass cuz it requires changing something in the private-key+website-name+master-pass. If either master-pass or private-key is changed then all the website passwords have to be changed. Which leaves us with website name. Only the website name in the combination can be changed to change the whole password without disrupting other passwords.
 
-im thinking a prefix that gets added at the end of the website name. But then that has to be saved to keep track of the password changes.
 
-Is there a way to add a prefix to the website name without saving the prefix. The prefix comes from the whole combination maybe?
-
-is it possible to change a private-key in a way that only changes one particular websites password?
-
-lets put a pin in this for now if you wanna change password all website passwords will be changed.
 
 
 

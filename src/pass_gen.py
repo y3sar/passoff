@@ -4,36 +4,33 @@ import os
 import random
 
 
-NO_NUMBER = 'n'
-NO_LOWER = 'l'
-NO_UPPER = 'u'
 
 
 
 def gen_password(website_name, master_pass, private_key=''):
   if private_key == '':
-    postfix = str(random.randint(100, 999));
+    postfix1 = random.randint(2,6);
+    postfix2 = random.randint(100, 999);
     # generate random private_key
-    private_key = hashlib.sha256(os.urandom(128)).hexdigest() + postfix;
+    private_key = hashlib.sha256(os.urandom(128)).hexdigest() + str(postfix1) + str(postfix2);
   else:
-    postfix = private_key[-3:]
+    postfix1 = int(private_key[-4]);
+    postfix2 = int(private_key[-3:]);
 
-  joined_text = (website_name+private_key+master_pass).encode('utf-8');
+  print(private_key);
+  joined_text = (private_key+website_name+master_pass).encode('utf-8');
 
   password_hash = hashlib.sha256(joined_text).hexdigest();
 
   # to add capital letters 
-  password = base64.b64encode(password_hash.encode('utf-8')).decode()[:12];
+  password = password_hash[:postfix1] + base64.b64encode(password_hash.encode('utf-8')).decode()[:12 - postfix1];
   
   is_valid = is_pass_valid(password);
 
   if is_valid == '':
     return password, private_key;
 
-  print(is_valid);
-  print(password + ' -> ' + fix_password(password, is_valid, postfix));
-
-  return fix_password(password, is_valid, postfix), private_key;
+  return fix_password(password, is_valid, postfix2), private_key;
 
 
 def fix_password(password, token, postfix):
@@ -79,12 +76,10 @@ def is_pass_valid(password):
 
 
 new_password, private_key = gen_password('twitch', 'bohogarden');
-new_password2, _ = gen_password('twitter', 'bohogarden', private_key=private_key);
-new_password3, _ = gen_password('facebook', 'bohogarden', private_key=private_key);
+new_password2, _ = gen_password('twitch', 'bohogarden', private_key=private_key);
 
 print(new_password);
 print(new_password2);
-print(new_password3);
 
 
 
