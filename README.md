@@ -1,17 +1,17 @@
 ## TODOS
 
-- [ ] Figure out how to save private keys and other info
+- [x] Figure out how to save private keys and other info
 - [x] Implement the password creator
 	- [x] new password creation
 	- [ ] password changing
 	- [x] unifying all passwords under one private key (involves changing all the passwords);
-- [ ] Implement the CLI
-- [ ] Solve repeating uppercase letters
+- [x ] Implement the CLI
+- [x] Solve repeating uppercase letters
 another postfix can be added to the privatekey that suggests how many characters will be taken from the password hash and how many from the base64 encoding.
 
 
-- [ ] Solve repeating lowercase letters
-- [ ] Solve repeating letters
+- [x] Solve repeating lowercase letters
+- [x] Solve repeating letters
 
 
 * If private-key.json exist

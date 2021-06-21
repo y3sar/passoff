@@ -7,8 +7,8 @@ import random
 
 
 
-def gen_password(website_name, master_pass, private_key=''):
-  if private_key == '':
+def gen_password(website_name, master_pass, private_key=None):
+  if private_key == None:
     postfix1 = random.randint(2,6);
     postfix2 = random.randint(100, 999);
     # generate random private_key
@@ -17,9 +17,7 @@ def gen_password(website_name, master_pass, private_key=''):
     postfix1 = int(private_key[-4]);
     postfix2 = int(private_key[-3:]);
 
-  print(private_key);
   joined_text = (private_key+website_name+master_pass).encode('utf-8');
-
   password_hash = hashlib.sha256(joined_text).hexdigest();
 
   # to add capital letters 
@@ -78,8 +76,8 @@ def is_pass_valid(password):
 new_password, private_key = gen_password('twitch', 'bohogarden');
 new_password2, _ = gen_password('twitch', 'bohogarden', private_key=private_key);
 
-print(new_password);
-print(new_password2);
+assert new_password == new_password2;
+
 
 
 
