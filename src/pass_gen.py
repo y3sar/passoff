@@ -73,10 +73,11 @@ def is_pass_valid(password):
 
 
 
-new_password, private_key = gen_password('twitch', 'bohogarden');
-new_password2, _ = gen_password('twitch', 'bohogarden', private_key=private_key);
+if __name__ == '__main__':
+  new_password, private_key = gen_password('twitch', 'bohogarden');
+  new_password2, _ = gen_password('twitch', 'bohogarden', private_key=private_key);
 
-assert new_password == new_password2;
+  assert new_password == new_password2;
 
 
 

@@ -1,10 +1,12 @@
 import argparse
 from pass_gen import gen_password
 import json
+import sys
 import os
 
 
 def create_new_pass(website_name, master_pass=None, private_key=None):
+
 
   json_found = True
 
@@ -76,34 +78,16 @@ def save_private_key(private_key):
 
 def get_private_key_from_json():
 
-  ret = None;
-  if 'private_key.json' in os.listdir():
-    try:
-      ret = open('private_key.json', 'r');
-    except FileNotFoundError:
-      print("error: file was not found in the given path");
+  exe_path, _ = os.path.split(sys.argv[0])
+  path = exe_path + '/private_key.json'
+
+  try:
+    ret = open(path, 'r');
+  except FileNotFoundError:
+    print(f'error: file was not found in the given path {path}');
+    return None
 
   return json.load(ret)['private_key'];
     
-
-parser = argparse.ArgumentParser();
-parser.add_argument('website_name');
-parser.add_argument('-n', '--new', action='store_true');
-parser.add_argument('-m', '--master');
-parser.add_argument('-p', '--private');
-
-args = parser.parse_args();
-
-website_name = args.website_name
-
-
-# Creates new password and private key
-if (args.new):
-  password, private_key = create_new_pass(website_name, master_pass=args.master);
-
-else:
-  password, _ = get_pass(website_name, master_pass=args.master, private_key=args.private);
-
-print(password);
 
 
